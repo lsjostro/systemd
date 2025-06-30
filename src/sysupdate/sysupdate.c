@@ -139,7 +139,6 @@ static int read_definitions(
         assert(dirs);
         assert(suffix);
 
-        log_info("pre conf_list arg_root is: %s", arg_root);
         r = conf_files_list_strv(&files, suffix, arg_root, CONF_FILES_REGULAR|CONF_FILES_FILTER_MASKED, dirs);
         if (r < 0)
                 return log_error_errno(r, "Failed to enumerate sysupdate.d/*%s definitions: %m", suffix);
@@ -156,7 +155,6 @@ static int read_definitions(
                 if (r < 0)
                         return r;
 
-                log_info("in loop arg_root is: %s", arg_root);
                 r = transfer_resolve_paths(t, arg_root, node);
                 if (r < 0)
                         return r;
@@ -1114,7 +1112,7 @@ static int process_image(
         log_info("process_image: func");
 
         if (!arg_image)
-                log_info("process_image: no arg_image return 0");
+                log_info("process_image: arg_image %s, return 0", arg_image);
                 return 0;
 
         assert(!arg_root);
@@ -1134,16 +1132,12 @@ static int process_image(
                         &mounted_dir,
                         /* ret_dir_fd= */ NULL,
                         &loop_device);
-        log_info("process_image: mount_image returned %d", r);
         if (r < 0)
                 return r;
 
-        log_info("process_image(pre set arg_root): arg_root: %s arg_image: %s", arg_root, arg_image);
         arg_root = strdup(mounted_dir);
         if (!arg_root)
                 return log_oom();
-
-        log_info("process_image: arg_root: %s arg_image: %s", arg_root, arg_image);
 
         *ret_mounted_dir = TAKE_PTR(mounted_dir);
         *ret_loop_device = TAKE_PTR(loop_device);

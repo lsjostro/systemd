@@ -707,7 +707,6 @@ int resource_resolve_path(
                                 return log_oom();
                 } else if (rr->path_relative_to == PATH_RELATIVE_TO_ROOT) {
                         relative_to = strdup(empty_to_root(root));
-                        log_info("FILESYSTEM RESOURCE: resolved path relative to '%s' (root: '%s')", relative_to, root);
                         if (!relative_to)
                                 return log_oom();
                 } else { /* boot, esp, or xbootldr */
@@ -724,7 +723,6 @@ int resource_resolve_path(
                         chase_flags |= CHASE_PROHIBIT_SYMLINKS;
                 }
 
-                log_info("Trying to resolve '%s' (relative to '%s')", rr->path, relative_to);
                 r = chase(rr->path, relative_to, chase_flags, &resolved, NULL);
                 if (r < 0)
                         return log_error_errno(r, "Failed to resolve '%s' (relative to '%s'): %m", rr->path, relative_to);
