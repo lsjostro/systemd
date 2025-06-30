@@ -1112,7 +1112,7 @@ static int process_image(
         log_info("process_image: func");
 
         if (!arg_image)
-                log_info("process_image: arg_image: %s return 0", arg_image);
+                log_info("process_image: arg_image is null return 0");
                 return 0;
 
         assert(!arg_root);
