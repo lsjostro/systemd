@@ -1109,8 +1109,10 @@ static int process_image(
         assert(ret_mounted_dir);
         assert(ret_loop_device);
 
-        if (!arg_image)
+        if (!arg_image) {
+                log_info("process_image(): no arg_image returning 0");
                 return 0;
+        }
 
         assert(!arg_root);
 
