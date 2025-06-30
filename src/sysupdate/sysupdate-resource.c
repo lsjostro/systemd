@@ -723,6 +723,7 @@ int resource_resolve_path(
                         chase_flags |= CHASE_PROHIBIT_SYMLINKS;
                 }
 
+                log_info("Trying to resolve '%s' (relative to '%s')", rr->path, relative_to);
                 r = chase(rr->path, relative_to, chase_flags, &resolved, NULL);
                 if (r < 0)
                         return log_error_errno(r, "Failed to resolve '%s' (relative to '%s'): %m", rr->path, relative_to);
