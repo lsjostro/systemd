@@ -1138,6 +1138,8 @@ static int process_image(
         if (!arg_root)
                 return log_oom();
 
+        log_info("process_image: arg_root: %s arg_image: %s", arg_root, arg_image);
+
         *ret_mounted_dir = TAKE_PTR(mounted_dir);
         *ret_loop_device = TAKE_PTR(loop_device);
 
