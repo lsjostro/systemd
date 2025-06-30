@@ -139,7 +139,7 @@ static int read_definitions(
         assert(dirs);
         assert(suffix);
 
-        log_info("pre conf_list arg_root is: %s", arg_root)
+        log_info("pre conf_list arg_root is: %s", arg_root);
         r = conf_files_list_strv(&files, suffix, arg_root, CONF_FILES_REGULAR|CONF_FILES_FILTER_MASKED, dirs);
         if (r < 0)
                 return log_error_errno(r, "Failed to enumerate sysupdate.d/*%s definitions: %m", suffix);
@@ -156,7 +156,7 @@ static int read_definitions(
                 if (r < 0)
                         return r;
 
-                log_info("in loop arg_root is: %s", arg_root)
+                log_info("in loop arg_root is: %s", arg_root);
                 r = transfer_resolve_paths(t, arg_root, node);
                 if (r < 0)
                         return r;
