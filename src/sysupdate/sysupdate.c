@@ -1111,6 +1111,8 @@ static int process_image(
         assert(ret_mounted_dir);
         assert(ret_loop_device);
 
+        log_info("in process_image func");
+
         if (!arg_image)
                 return 0;
 
@@ -1134,6 +1136,7 @@ static int process_image(
         if (r < 0)
                 return r;
 
+        log_info("process_image(pre set arg_root): arg_root: %s arg_image: %s", arg_root, arg_image);
         arg_root = strdup(mounted_dir);
         if (!arg_root)
                 return log_oom();
