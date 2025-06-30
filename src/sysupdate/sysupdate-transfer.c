@@ -679,6 +679,8 @@ int transfer_resolve_paths(
 
         assert(t);
 
+        log_info("transfer_resolve_path: root is", root);
+
         r = resource_resolve_path(&t->source, root, arg_transfer_source, node);
         if (r < 0)
                 return r;
