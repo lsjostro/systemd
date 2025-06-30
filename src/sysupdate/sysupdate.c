@@ -1109,10 +1109,8 @@ static int process_image(
         assert(ret_mounted_dir);
         assert(ret_loop_device);
 
-        if (!arg_image) {
-                log_info("process_image(): no arg_image returning 0");
+        if (!arg_image)
                 return 0;
-        }
 
         assert(!arg_root);
 
@@ -1134,9 +1132,9 @@ static int process_image(
         if (r < 0)
                 return r;
 
-        arg_root = strdup(mounted_dir);
-        if (!arg_root)
-                return log_oom();
+        // arg_root = strdup(mounted_dir);
+        // if (!arg_root)
+        //         return log_oom();
 
         *ret_mounted_dir = TAKE_PTR(mounted_dir);
         *ret_loop_device = TAKE_PTR(loop_device);
