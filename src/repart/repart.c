@@ -9076,8 +9076,6 @@ static int parse_argv(int argc, char *argv[], X509 **ret_certificate, EVP_PKEY *
                                        "Expected at most one argument, the path to the block device or image file.");
 
         if (arg_make_ddi) {
-                if (arg_definitions)
-                        return log_error_errno(SYNTHETIC_ERRNO(EINVAL), "Combination of --make-ddi= and --definitions= is not supported.");
                 if (!IN_SET(arg_empty, EMPTY_UNSET, EMPTY_CREATE))
                         return log_error_errno(SYNTHETIC_ERRNO(EINVAL), "Combination of --make-ddi= and --empty=%s is not supported.", empty_mode_to_string(arg_empty));
 
@@ -9745,20 +9743,6 @@ static int run(int argc, char *argv[]) {
                 return r;
 
         if (arg_make_ddi) {
-                _cleanup_free_ char *d = NULL, *dp = NULL;
-                assert(!arg_definitions);
-
-                d = strjoin(arg_make_ddi, ".repart.d/");
-                if (!d)
-                        return log_oom();
-
-                r = search_and_access(d, F_OK, NULL, CONF_PATHS_STRV("systemd/repart/definitions"), &dp);
-                if (r < 0)
-                        return log_error_errno(r, "DDI type '%s' is not defined: %m", arg_make_ddi);
-
-                if (strv_consume(&arg_definitions, TAKE_PTR(dp)) < 0)
-                        return log_oom();
-        } else
                 strv_uniq(arg_definitions);
 
         r = context_read_definitions(context);
