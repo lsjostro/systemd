@@ -1111,13 +1111,14 @@ static int process_image(
         assert(ret_mounted_dir);
         assert(ret_loop_device);
 
-        log_info("in process_image func");
+        log_info("process_image: func");
 
         if (!arg_image)
+                log_info("process_image: no arg_image return 0");
                 return 0;
 
         assert(!arg_root);
-
+        log_info("process_image: mount image: %s", arg_image);
         r = mount_image_privately_interactively(
                         arg_image,
                         arg_image_policy,
@@ -1133,6 +1134,7 @@ static int process_image(
                         &mounted_dir,
                         /* ret_dir_fd= */ NULL,
                         &loop_device);
+        log_info("process_image: mount_image returned %d", r);
         if (r < 0)
                 return r;
 
