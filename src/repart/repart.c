@@ -9742,7 +9742,7 @@ static int run(int argc, char *argv[]) {
         if (r < 0)
                 return r;
 
-        if (arg_make_ddi) {
+        if (arg_make_ddi)
                 strv_uniq(arg_definitions);
 
         r = context_read_definitions(context);
