@@ -1115,7 +1115,6 @@ static int process_image(
 
         assert(!arg_root);
 
-        log_info("process_image: mount image: %s", arg_image);
         r = mount_image_privately_interactively(
                         arg_image,
                         arg_image_policy,
