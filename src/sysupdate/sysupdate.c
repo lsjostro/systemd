@@ -1110,7 +1110,6 @@ static int process_image(
         assert(ret_loop_device);
 
         if (!arg_image)
-                log_info("process_image: arg_image is null return 0");
                 return 0;
 
         assert(!arg_root);
