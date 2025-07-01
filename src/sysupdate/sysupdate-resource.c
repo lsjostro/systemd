@@ -706,7 +706,7 @@ int resource_resolve_path(
                         if (!relative_to)
                                 return log_oom();
                 } else if (rr->path_relative_to == PATH_RELATIVE_TO_ROOT) {
-                        relative_to = strdup(empty_to_root(root));
+                        relative_to = strdup("/");
                         if (!relative_to)
                                 return log_oom();
                 } else { /* boot, esp, or xbootldr */
