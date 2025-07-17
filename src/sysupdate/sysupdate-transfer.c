@@ -680,7 +680,7 @@ int transfer_resolve_paths(
         assert(t);
 
         r = resource_resolve_path(&t->source, root, arg_transfer_source, node);
-        if (r < 0)
+        if (r < 0 && !RESOURCE_IS_FILESYSTEM((&t->target)->type))
                 return r;
 
         r = resource_resolve_path(&t->target, root, /*relative_to_directory=*/ NULL, node);
